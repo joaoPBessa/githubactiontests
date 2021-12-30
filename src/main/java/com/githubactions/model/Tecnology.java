@@ -1,12 +1,12 @@
 package com.githubactions.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,13 +19,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Tecnology implements Serializable {
+@SequenceGenerator(name = Tecnology.TECNOLOGY_GENERATOR, allocationSize = 1, initialValue = 1, sequenceName = "TECNOLOGY_ID")
+public class Tecnology {
 	
-	@Transient
-	private static final long serialVersionUID = 1L;
+	protected static final String TECNOLOGY_GENERATOR = "TECNOLOGY_GENERATOR"; 
 	
 	@Id
 	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = TECNOLOGY_GENERATOR)
 	private Integer id;
 	
 	@Column(name = "DESCRIPTION")
